@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const db = require("./app/models");
+db.sequelize.sync();
 
 //var corsOptions = {
 //    origin: "http://localhost:9091"
@@ -22,6 +24,8 @@ app.get("/", (req, res) => {
 
 // set port, listen for requests
 const PORT = process.env.PORT || 9090;
+
+require("./app/routes/paciente.routes")(app);
 
 app.listen(PORT, () => {
     console.log('Servidor corriendo en puerto 9090.');
