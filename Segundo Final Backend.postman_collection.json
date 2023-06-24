@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "23e08101-f6b9-4cf1-a53d-4f08c017443b",
+		"name": "Segundo Final Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22927636"
+	},
+	"item": [
+		{
+			"name": "Paciente",
+			"item": [
+				{
+					"name": "Crear Paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cedula\" : 2222222,\r\n    \"nombre\" : \"Andres\",\r\n    \"apellido\" : \"Heo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/paciente",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"paciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista Pacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/paciente",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"paciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Paciente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cedula\" : 2222222,\r\n    \"nombre\" : \"Andres\",\r\n    \"apellido\" : \"Heo\",\r\n    \"email\" : \"andresheokim@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/paciente/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"paciente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Paciente por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/paciente/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"paciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/paciente/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"paciente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medico",
+			"item": [
+				{
+					"name": "Crear Medico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cedula\" : 3333333,\r\n    \"nombre\" : \"Laura\",\r\n    \"apellido\" : \"Troche\",\r\n    \"especialidad\" : \"Traumatologia\",\r\n    \"username\" : \"ltroche\",\r\n    \"password\" : \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/medico",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"medico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista Medicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/medico",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"medico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Medico",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cedula\" : 3333333,\r\n    \"nombre\" : \"Laura\",\r\n    \"apellido\" : \"Troche\",\r\n    \"especialidad\" : \"Traumatologia\",\r\n    \"username\" : \"ltroche\",\r\n    \"password\" : \"123\",\r\n    \"email\" : \"lauratroche@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/medico/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"medico",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Medico por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/medico/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"medico",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Medico",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/medico/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"medico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ficha",
+			"item": [
+				{
+					"name": "Crear Ficha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fecha\" : \"2023-06-24 16:15:39.633 -0400\",\r\n    \"pacienteId\" : \"1\",\r\n    \"medicoId\" : \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/ficha",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Detalle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fichaId\" : \"1\",\r\n    \"motivo\" : \"Dolor de cabeza\",\r\n    \"diagnostico\" : \"Cancer\",\r\n    \"tratamiento\" : \"12 dias de vida\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/ficha/detalle",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								"detalle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Ficha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/ficha/",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Ficha con Detalles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/ficha/completo",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								"completo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Ficha",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fecha\" : \"2023-06-24 16:15:39.633 -0400\",\r\n    \"pacienteId\" : \"1\",\r\n    \"medicoId\" : \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/api/ficha/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Ficha por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/ficha/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Ficha por Id con Detalles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/ficha/completo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								"completo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Ficha",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/ficha/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
