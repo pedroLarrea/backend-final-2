@@ -6,6 +6,10 @@ module.exports = app => {
 
     router.post("/", paciente.create);
 
+    router.put("/:id", paciente.update);
+
+    router.delete("/:id", paciente.deleteOne);
+
     router.get("/", paciente.findAll);
 
     router.get("/:id", paciente.findOne);
