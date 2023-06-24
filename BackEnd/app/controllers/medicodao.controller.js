@@ -1,6 +1,6 @@
 const db = require("../models");
 
-const Paciente = db.Paciente;
+const Medico = db.Medico;
 
 const Op = db.Sequelize.Op;
 
@@ -8,11 +8,12 @@ exports.create = (req, res) => {
 
     // Validate request
 
-    if (!req.body.cedula ||  !req.body.nombre || !req.body.apellido) {
+    if (!req.body.cedula || !req.body.nombre || !req.body.apellido
+        || !req.body.especialidad || !req.body.username || !req.body.password) {
 
         res.status(400).send({
 
-            message: "Nombre, Apellido y Cedula son obligatorios!"
+            message: "Nombre, Apellido, Cedula, Username y Password son obligatorios!"
 
         });
 
@@ -22,18 +23,21 @@ exports.create = (req, res) => {
 
     // crea una venta
 
-    const paciente = {
+    const medico = {
         cedula: req.body.cedula,
         nombre: req.body.nombre,
         apellido: req.body.apellido,
         email: req.body.email,
         telefono: req.body.telefono,
-        fechaNacimiento: req.body.fechaNacimiento
+        fechaNacimiento: req.body.fechaNacimiento,
+        especialidad: req.body.especialidad,
+        username: req.body.username,
+        password: req.body.password
     };
 
     // Guardamos a la base de datos
 
-    Paciente.create(paciente)
+    Medico.create(medico)
 
         .then(data => {
 
@@ -47,7 +51,7 @@ exports.create = (req, res) => {
 
                 message:
 
-                    err.message || "Ha ocurrido un error al crear un paciente."
+                    err.message || "Ha ocurrido un error al crear un medico."
 
             });
 
@@ -58,7 +62,7 @@ exports.create = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Paciente.findByPk(id)
+    Medico.findByPk(id)
 
         .then((data) => {
             res.send(data);
@@ -66,7 +70,7 @@ exports.findOne = (req, res) => {
 
         .catch((err) => {
             res.status(500).send({
-                message: "Error al obtener paciente con id=" + id,
+                message: "Error al obtener medico con id=" + id,
             });
         });
 };
@@ -74,7 +78,7 @@ exports.findOne = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Paciente.findAll()
+    Medico.findAll()
 
         .then((data) => {
             res.send(data);
@@ -82,7 +86,7 @@ exports.findAll = (req, res) => {
 
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Ocurrio un error al obtener los clientes.",
+                message: err.message || "Ocurrio un error al obtener los medicos.",
             });
         });
 };
@@ -91,7 +95,7 @@ exports.deleteOne = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const response = await Paciente.destroy({
+        const response = await Medico.destroy({
             where: { id: id },
         })
             .then(function (data) {
@@ -116,22 +120,26 @@ exports.update = async (req, res) => {
     try {
         const { id } = req.params;
 
-        if (!req.body.cedula ||  !req.body.nombre || !req.body.apellido) {
+        if (!req.body.cedula || !req.body.nombre || !req.body.apellido
+            || !req.body.especialidad || !req.body.username || !req.body.password) {
             res.status(400).send({
-                message: "Nombre, Apellido y Cedula son obligatorios!",
+                message: "Nombre, Apellido, Cedula, Username y Password son obligatorios!",
             });
 
             return;
         }
 
-        const response = await Paciente.update(
+        const response = await Medico.update(
             {
                 cedula: req.body.cedula,
                 nombre: req.body.nombre,
                 apellido: req.body.apellido,
                 email: req.body.email,
                 telefono: req.body.telefono,
-                fechaNacimiento: req.body.fechaNacimiento
+                fechaNacimiento: req.body.fechaNacimiento,
+                especialidad: req.body.especialidad,
+                username: req.body.username,
+                password: req.body.password
             },
             {
                 where: { id: id },
