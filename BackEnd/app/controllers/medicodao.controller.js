@@ -21,7 +21,7 @@ exports.create = (req, res) => {
 
     }
 
-    // crea una venta
+    // crea una medico
 
     const medico = {
         cedula: req.body.cedula,
