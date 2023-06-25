@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Form = () => {
@@ -7,6 +8,7 @@ const Form = () => {
   const [medicoId, setMedicoId] = useState('');
   const [medicos, setMedicos] = useState([]);
   const [pacientes, setPacientes] = useState([]);
+  const navigate = useNavigate();
 
   const fetchMedicos = () => {
     axios.get('http://localhost:9090/api/medico')
@@ -53,11 +55,12 @@ const Form = () => {
       .then((result) => {
         // Handle the response from the backend
         console.log(result);
-        
+        console.log(result.id);
         // Resetea campos del form
-        setFecha('');
-        setPacienteId('');
-        setMedicoId('');
+        //setFecha('');
+        //setPacienteId('');
+        //setMedicoId('');
+        navigate(`../ficha-detalles/${result.id}`);
       })
       .catch((error) => {
         console.error('Error:', error);
