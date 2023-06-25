@@ -8,6 +8,7 @@ function ListaConsultas() {
     const [fichas, setFichas] = useState([]);
     const [textoBuscar, setTextoBuscar] = useState('');
     const [filters, setFilters] = useState({
+        id: '',
         fecha: '',
         medicoEspecialidad: '',
         medicoNombre: '',
@@ -15,6 +16,18 @@ function ListaConsultas() {
         pacienteNombre: '',
         pacienteApellido: ''
       });
+
+    const[query, setQuery]=useState();
+    
+    const search1 = ()=>{
+          return fichas.filter(
+          (ficha) =>
+          ficha.Medico.nombre.toLowerCase().includes(query)||
+          ficha.Paciente.nombre.toLowerCase().includes(query) ||
+          ficha.id.toLowerCase().includes(query) ||
+          ficha.fecha.toLowerCase().includes(query)
+          );
+      }
 
     const handleDelete = (id) => {
         axios.delete(`http://localhost:9090/api/ficha/${id}`)
@@ -39,14 +52,14 @@ function ListaConsultas() {
 
     //Para el buscador
 
-    const filteredData = fichas.filter((item) => {
-        const { Fecha, Medico, Paciente } = item;
-        const { fecha, medicoEspecialidad, medicoNombre, medicoApellido, pacienteNombre, pacienteApellido } = filters;
 
-        const formattedFecha = Fecha ? Fecha.toString() : '';
+    const filteredData = fichas.filter((item) => {
+        const { Medico, Paciente } = item;
+        const { idFicha, fechaFicha, medicoEspecialidad, medicoNombre, medicoApellido, pacienteNombre, pacienteApellido } = filters;
 
         return (
-          formattedFecha.includes(fecha) &&
+            idFicha ? item.id.toLowerCase().includes(idFicha) : true &&
+            fechaFicha ? item.fecha.toLowerCase().includes(fechaFicha) : true &&
           Medico.especialidad.toLowerCase().includes(medicoEspecialidad.toLowerCase()) &&
           Medico.nombre.toLowerCase().includes(medicoNombre.toLowerCase()) &&
           Medico.apellido.toLowerCase().includes(medicoApellido.toLowerCase()) &&
@@ -66,41 +79,12 @@ function ListaConsultas() {
         fetchRecords();
     }, []);
 
-    const search = event => {
-        event.preventDefault();
-        if (event.target.value) {
-
-            let filtered = fichas.filter(item => {
-                return (
-                    item.id == event.target.value ||
-                    item.fecha ==  event.target.value ||
-                    item.Medico.nombre.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.Medico.apellido.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.Medico.especialidad.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.Paciente.nombre.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.Paciente.apellido.toLowerCase().includes(event.target.value.toLowerCase()) 
-                );
-            });
-            setFichas(filtered);
-            setTextoBuscar(event.target.value);
-
-        } else {
-            fetchRecords();
-            setTextoBuscar("");
-        }
-
-        console.log("fichas:", fichas);
-        console.log("event.target.value:", event.target.value);
-    };
-
     return (
         <div id="mainDivId">
-            <div id="filtrarTabla">
-                <input type="search" placeholder="Buscar en todos los campos" value={textoBuscar} onChange={search} />
-            </div>
             <div>
-                <input type="text" name="fecha" value={filters.fecha} onChange={handleFilterChange} placeholder="Filtre por Fecha" />
-                <input type="text" name="medicoEspecialidad" value={filters.medicoEspecialidad} onChange={handleFilterChange} placeholder="Filtre por especialidad" />
+                <input type="text" name="idFicha" value={filters.idFicha} onChange={handleFilterChange} placeholder="Filtre por Id" />
+                <input type="text" name="fechaFicha" value={filters.fechaFicha} onChange={handleFilterChange} placeholder="Filtre por Fecha" />
+                <input type="text" name="medicoEspecialidad" value={filters.medicoEspecialidad} onChange={handleFilterChange} placeholder="Filtre por Especialidad" />
                 <input type="text" name="medicoNombre" value={filters.medicoNombre} onChange={handleFilterChange} placeholder="Filtre por Medico Nombre" />
                 <input type="text" name="medicoApellido" value={filters.medicoApellido} onChange={handleFilterChange} placeholder="Filtre por Medico Apellido" />
                 <input type="text" name="pacienteNombre" value={filters.pacienteNombre} onChange={handleFilterChange} placeholder="Filtre por Paciente Nombre" />
