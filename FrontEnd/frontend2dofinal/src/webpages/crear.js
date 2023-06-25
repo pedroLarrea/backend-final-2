@@ -60,7 +60,7 @@ const Form = () => {
         setFecha('');
         setPacienteId('');
         setMedicoId('');
-        //navigate(`/detalle/${result.id}`);
+        navigate(`/detalle/${result.id}`);
       })
       .catch((error) => {
         console.error('Error:', error);
