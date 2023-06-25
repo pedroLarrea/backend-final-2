@@ -252,3 +252,28 @@ exports.createDetalle = (req, res) => {
         });
 
 };
+
+exports.deleteDetalle = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const response = await Detalle.destroy({
+            where: { id: id },
+        })
+            .then(function (data) {
+                const res = {
+                    success: true,
+                    data: data,
+                    message: "Eliminado con exito",
+                };
+                return res;
+            })
+            .catch((error) => {
+                const res = { success: false, error: error };
+                return res;
+            });
+        res.json(response);
+    } catch (e) {
+        console.log(e);
+    }
+};

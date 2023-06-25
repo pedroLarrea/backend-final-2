@@ -6,7 +6,7 @@
 }
 
 #listaConsultasId th, #listaConsultasId td {
-  text-align: left; /* Left-align text */
+  text-align: center; /* Left-align text */
   padding: 12px; /* Add padding */
 }
 
@@ -15,9 +15,21 @@
   border-bottom: 1px solid #ddd;
 }
 
-#listaConsultasId tr.header, #listaConsultasId tr:hover {
+.listaDetalle tr:hover {
   /* Add a grey background color to the table header and on hover */
   background-color: #f1f1f1;
+}
+
+.cabecaraGeneral{
+  background-color: #04AA6D;
+}
+
+.cabecaraEditarDetalle{
+  background-color: cornflowerblue;
+}
+
+.cabecaraVerDetalle{
+  background-color: chocolate;
 }
 
 #mainDivId{
@@ -33,4 +45,16 @@
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
+}
+
+.botonEliminar {
+  background-color: red !important;
+}
+
+.botonEditar {
+  background-color: cornflowerblue !important;
+}
+
+.botonVer {
+  background-color: chocolate  !important;
 }

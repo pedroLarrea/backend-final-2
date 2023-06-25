@@ -22,6 +22,8 @@ module.exports = app => {
 
     router.post("/detalle", ficha.createDetalle);
 
+    router.delete("/detalle/:id", ficha.deleteDetalle);
+
     app.use('/api/ficha', router);
 
 };
