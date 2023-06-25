@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../css/Crear.css';
 
 const Form = () => {
   const [fecha, setFecha] = useState(new Date().toISOString().split('T')[0]);
@@ -78,7 +79,7 @@ const Form = () => {
   return (
     <div>
       <h1><center>Crear Ficha</center></h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="CrearConsultasId">
         <div>
           <label htmlFor="fecha">Fecha:</label>
           <input

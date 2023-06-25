@@ -10,14 +10,14 @@ function ListaConsultas() {
 
     const handleDelete = (id) => {
         axios.delete(`http://localhost:9090/api/ficha/${id}`)
-          .then((response) => {
-            console.log(response.data);
-            fetchRecords();
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-        };
+            .then((response) => {
+                console.log(response.data);
+                fetchRecords();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
     const fetchRecords = () => {
         axios.get('http://localhost:9090/api/ficha')
             .then(response => {
@@ -32,36 +32,42 @@ function ListaConsultas() {
     }, []);
 
     return (
-        <table id="listaConsultasId">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Fecha</th>
-                    <th>Medico</th>
-                    <th>Paciente</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {fichas.map(ficha => (
-                    <tr key={ficha.id}>
-                        <td>{ficha.id}</td>
-                        <td>{ficha.fecha}</td>
-                        <td>{ficha.Medico.nombre} {ficha.Medico.apellido}</td>
-                        <td>{ficha.Paciente.nombre} {ficha.Paciente.apellido}</td>
-                        <td>
-                            <div>
-                                <Link to={`ficha/${ficha.id}`}><button>Editar</button></Link>
-                                <Link to={`ficha/${ficha.id}`}><button>Ver</button></Link>
-                                <Link to={`detalle/${ficha.id}`}><button>Agregar Detalle</button></Link>
-                                <button onClick={ () => handleDelete(ficha.id) }>Eliminar</button>
-                            </div>
-                        </td>
+        <div id="mainDivId">
+            <table id="listaConsultasId">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Fecha</th>
+                        <th>Medico</th>
+                        <th>Paciente</th>
+                        <th><center>Opciones</center></th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                    {fichas.map(ficha => (
+                        <tr key={ficha.id}>
+                            <td>{ficha.id}</td>
+                            <td>{ficha.fecha}</td>
+                            <td>{ficha.Medico.nombre} {ficha.Medico.apellido}</td>
+                            <td>{ficha.Paciente.nombre} {ficha.Paciente.apellido}</td>
+                            <td>
+                                <div>
+                                    <center>
+                                        <Link to={`ficha/${ficha.id}`}><button>Editar</button></Link>
+                                        <Link to={`ficha/${ficha.id}`}><button>Ver</button></Link>
+                                        <Link to={`detalle/${ficha.id}`}><button>Agregar Detalle</button></Link>
+                                        <button onClick={() => handleDelete(ficha.id)}>Eliminar</button>
+                                    </center>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <div>
+                <Link to={`ficha/`}><button>Crear Ficha</button></Link>
+            </div>
+        </div>
     );
 }
 
@@ -69,10 +75,6 @@ function App() {
     return (
         <div>
             <h1><center>Listado de consultas</center></h1>
-            <div><center>
-                <Link to={`ficha/`}><button>Crear Ficha</button></Link>
-                </center>
-            </div>
             <ListaConsultas />
         </div>
     );
