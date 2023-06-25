@@ -68,9 +68,9 @@ const DetalleForm = props => {
         console.log(result);
         console.log(result.id);
         // Resetea campos del form
-        //setFecha('');
-        //setPacienteId('');
-        //setMedicoId('');
+        setMotivo('');
+        setDiagnostico('');
+        setTratamiento('');
         //navigate(`/detalle/${result.id}`);
       })
       .catch((error) => {
