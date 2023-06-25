@@ -58,3 +58,17 @@
 .botonVer {
   background-color: chocolate  !important;
 }
+
+#buscadorId{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  border: 2px solid #ddd; /* Add a grey border */
+}
+
+#buscadorId input{
+  width: 80%;
+}
+
