@@ -3,28 +3,30 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const DetalleForm = props => {
-  
+  const { id } = useParams();
+  const [fichaId, setFichaId] = useState(id);
+  const [tratamiento, setTratamiento] = useState('');
+  const [diagnostico, setDiagnostico] = useState('');
+  const [motivo, setMotivo] = useState('');
+
+
   const [fichas, setFichas] = useState([]);
   const [ficha, setFicha] = useState('');
-  const { id } = useParams();
+  
 
   const fetchFichaDetails = () => {
       axios.get(`http://localhost:9090/api/ficha/${id}`)
           .then(response => {
             console.log(response.data);
-              setFicha(response.data);
+            setFicha(response.data);
           })
           .catch(error => {
               console.error(error);
           });
   }
 
-  useEffect(() => {
-      fetchFichaDetails();
-  }, []);
-
   const [formData, setFormData] = useState({
-    id: '',
+    fichaId: id,
     motivo: '',
     diagnostico: '',
     tratamiento: ''
@@ -38,43 +40,64 @@ const DetalleForm = props => {
     }));
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // Prepara el dato para enviar al backend
+    const data = {
+      fichaId,
+      motivo,
+      diagnostico,
+      tratamiento
+    };
+    
+    
+    setFichaId(id);
+    console.log(JSON.stringify(data));
+    fetch('http://127.0.0.1:9090/api/ficha/detalle', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        // Handle the response from the backend
+        console.log(result);
+        console.log(result.id);
+        // Resetea campos del form
+        //setFecha('');
+        //setPacienteId('');
+        //setMedicoId('');
+        //navigate(`/detalle/${result.id}`);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
+
+  useEffect(() => {
+    fetchFichaDetails();
+  }, []);
 
   return (
     <div>
         <p>Ficha ID: {id}</p>
-        <p>Medico ID: {ficha.Medico.nombre} </p>
-        <p>Paciente ID: {ficha.Paciente.nombre}</p>
+        <p>Medico ID: {ficha.medicoId} </p>
+        <p>Paciente ID: {ficha.pacienteId}</p>
         <form onSubmit={handleSubmit}>
         <div>
             <label htmlFor="motivoField">Motivo:</label>
-            <textarea
-            id="motivoField"
-            name="motivo"
-            value={formData.motivo}
-            onChange={handleChange}
-            />
+            <textarea value={motivo} onChange={(e) => setMotivo(e.target.value)} required/>
         </div>
         <div>
             <label htmlFor="diagnosticoField">Diagnostico:</label>
-            <textarea
-            id="diagnosticoField"
-            name="diagnostico"
-            value={formData.diagnostico}
-            onChange={handleChange}
-            />
+            <textarea value={diagnostico} onChange={(e) => setDiagnostico(e.target.value)} required/>
         </div>
         <div>
             <label htmlFor="tratamientoField">Tratamiento:</label>
-            <textarea
-            id="tratamientoField"
-            name="tratamiento"
-            value={formData.tratamiento}
-            onChange={handleChange}
-            />
+            <textarea value={tratamiento} onChange={(e) => setTratamiento(e.target.value)} required/>
         </div>
         <button type="submit">Agregar</button>
         </form>
