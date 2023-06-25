@@ -437,6 +437,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Eliminar Detalle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/ficha/detalle/8",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"ficha",
+								"detalle",
+								"8"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
