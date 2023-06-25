@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/Home.css';
 import { Link } from 'react-router-dom';
-import { Helmet } from "react-helmet";
 
 
 function ListaConsultas() {

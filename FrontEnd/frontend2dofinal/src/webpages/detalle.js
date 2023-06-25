@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../css/Detalle.css';
 
 const DetalleForm = props => {
   
@@ -44,7 +45,7 @@ const DetalleForm = props => {
   };
 
   return (
-    <div>
+    <div id="CrearDetalleId">
         <p>Ficha ID: {id}</p>
         <p>Medico ID: {ficha.Medico.nombre} </p>
         <p>Paciente ID: {ficha.Paciente.nombre}</p>
