@@ -16,7 +16,7 @@ const Webpages = () => {
                 <Route path="/" element={<Home/>} />
                 <Route path="/ficha/:id" element={<Ficha/>} />
                 <Route path="/ficha/" element={<Crear/>} />
-                <Route path="/detalle/:id" component={Detalle} />
+                <Route path="/detalle/:id" element={<Detalle/>} />
             </Routes>
         </BrowserRouter>
     );

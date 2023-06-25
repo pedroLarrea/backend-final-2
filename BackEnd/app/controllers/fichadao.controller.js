@@ -2,6 +2,8 @@ const db = require("../models");
 
 const Ficha = db.Ficha;
 const Detalle = db.Detalle;
+const Medico = db.Medico;
+const Paciente = db.Paciente;
 
 const Op = db.Sequelize.Op;
 
@@ -56,7 +58,14 @@ exports.create = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Ficha.findByPk(id)
+    Ficha.findByPk(id, {
+        include: [{
+            model: Medico
+        },
+        {
+            model: Paciente
+        }]
+    })
 
         .then((data) => {
             res.send(data);
@@ -93,10 +102,10 @@ exports.findAll = (req, res) => {
 
     Ficha.findAll({
         include: [{
-            model: db.Medico
+            model: Medico
         },
         {
-            model: db.Paciente
+            model: Paciente
         }]
     })
 
