@@ -67,10 +67,11 @@ function ListaConsultas() {
 function App() {
     return (
         <div>
-            <div>
-                <Link to={`ficha/`}><button>Crear Ficha</button></Link>
-            </div>
             <h1><center>Listado de consultas</center></h1>
+            <div><center>
+                <Link to={`ficha/`}><button>Crear Ficha</button></Link>
+                </center>
+            </div>
             <ListaConsultas />
         </div>
     );
