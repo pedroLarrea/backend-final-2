@@ -84,20 +84,20 @@ function ListaConsultas() {
             FILTRAR LISTA
             <hr />
             <div id="buscadorId">
-                <label for="Name">Id:</label>
+                <label >Id:</label>
                 <input type="text" name="idFicha" value={filters.idFicha} onChange={handleFilterChange} placeholder="Filtre por Id" />
-                <label for="Name">Fecha:</label>
-                <input type="text" name="fechaFicha" value={filters.fechaFicha} onChange={handleFilterChange} placeholder="Filtre por Fecha" />
-                <label for="Name">Especialidad:</label>
-                <input type="text" name="medicoEspecialidad" value={filters.medicoEspecialidad} onChange={handleFilterChange} placeholder="Filtre por Especialidad" />
-                <label for="Name">Nombre Medico:</label>
-                <input type="text" name="medicoNombre" value={filters.medicoNombre} onChange={handleFilterChange} placeholder="Filtre por Medico Nombre" />
-                <label for="Name">Apellido Medico:</label>
-                <input type="text" name="medicoApellido" value={filters.medicoApellido} onChange={handleFilterChange} placeholder="Filtre por Medico Apellido" />
-                <label for="Name">Nombre Paciente:</label>
+                <label >Nombre Paciente:</label>
                 <input type="text" name="pacienteNombre" value={filters.pacienteNombre} onChange={handleFilterChange} placeholder="Filtre por Paciente Nombre" />
-                <label for="Name">Apellido Paciente:</label>
+                <label >Fecha:</label>
+                <input type="text" name="fechaFicha" value={filters.fechaFicha} onChange={handleFilterChange} placeholder="Filtre por Fecha" />
+                <label >Nombre Medico:</label>
+                <input type="text" name="medicoNombre" value={filters.medicoNombre} onChange={handleFilterChange} placeholder="Filtre por Medico Nombre" />
+                <label >Apellido Paciente:</label>
                 <input type="text" name="pacienteApellido" value={filters.pacienteApellido} onChange={handleFilterChange} placeholder="Filtre por Paciente Apellido" />
+                <label >Especialidad:</label>
+                <input type="text" name="medicoEspecialidad" value={filters.medicoEspecialidad} onChange={handleFilterChange} placeholder="Filtre por Especialidad" />
+                <label >Apellido Medico:</label>
+                <input type="text" name="medicoApellido" value={filters.medicoApellido} onChange={handleFilterChange} placeholder="Filtre por Medico Apellido" />
             </div>
             <table id="listaConsultasId">
                 <thead className="cabecaraGeneral">
