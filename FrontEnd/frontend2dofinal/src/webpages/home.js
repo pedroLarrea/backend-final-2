@@ -4,10 +4,21 @@ import '../css/Home.css';
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
+
 function ListaConsultas() {
     const [fichas, setFichas] = useState([]);
 
-    useEffect(() => {
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:9090/api/ficha/${id}`)
+          .then((response) => {
+            console.log(response.data);
+            fetchRecords();
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+        };
+    const fetchRecords = () => {
         axios.get('http://localhost:9090/api/ficha')
             .then(response => {
                 setFichas(response.data);
@@ -15,6 +26,9 @@ function ListaConsultas() {
             .catch(error => {
                 console.error(error);
             });
+    }
+    useEffect(() => {
+        fetchRecords();
     }, []);
 
     return (
@@ -39,7 +53,7 @@ function ListaConsultas() {
                             <div>
                                 <Link to={`ficha/${ficha.id}`}><button>Editar</button></Link>
                                 <Link to={`ficha/${ficha.id}`}><button>Ver</button></Link>
-                                <button>Eliminar</button>
+                                <button onClick={ () => handleDelete(ficha.id) }>Eliminar</button>
                             </div>
                         </td>
                     </tr>

@@ -8,14 +8,13 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Prepare the data object to send to the backend
+    // Prepara el dato para enviar al backend
     const data = {
       fecha,
       pacienteId,
       medicoId,
     };
-  
-    // Make a POST request to your backend endpoint
+
     fetch('http://127.0.0.1:9090/api/ficha', {
       method: 'POST',
       headers: {
@@ -26,15 +25,14 @@ const Form = () => {
       .then((response) => response.json())
       .then((result) => {
         // Handle the response from the backend
-        console.log(result); // You can customize this based on your requirements
+        console.log(result);
         
-        // Reset form fields
+        // Resetea campos del form
         setFecha('');
         setPacienteId('');
         setMedicoId('');
       })
       .catch((error) => {
-        // Handle any errors that occur during the request
         console.error('Error:', error);
       });
   };
