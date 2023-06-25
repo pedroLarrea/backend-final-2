@@ -72,9 +72,9 @@ exports.findOne = (req, res) => {
 exports.findOneConDetalles = (req, res) => {
     const id = req.params.id;
 
-    Ficha.findByPk(id,{
-        include : {
-            model : Detalle
+    Ficha.findByPk(id, {
+        include: {
+            model: Detalle
         }
     })
 
@@ -91,7 +91,14 @@ exports.findOneConDetalles = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-    Ficha.findAll()
+    Ficha.findAll({
+        include: [{
+            model: db.Medico
+        },
+        {
+            model: db.Paciente
+        }]
+    })
 
         .then((data) => {
             res.send(data);
@@ -107,8 +114,8 @@ exports.findAll = (req, res) => {
 exports.findAllConDetalles = (req, res) => {
 
     Ficha.findAll({
-        include : {
-            model : Detalle
+        include: {
+            model: Detalle
         }
     })
 
