@@ -1,14 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const DetalleForm = props => {
+  
+  const [fichas, setFichas] = useState([]);
+  const [ficha, setFicha] = useState('');
+  const { id } = useParams();
+
+  const fetchFichaDetails = () => {
+      axios.get(`http://localhost:9090/api/ficha/${id}`)
+          .then(response => {
+            console.log(response.data);
+              setFicha(response.data);
+          })
+          .catch(error => {
+              console.error(error);
+          });
+  }
+
+  useEffect(() => {
+      fetchFichaDetails();
+  }, []);
+
   const [formData, setFormData] = useState({
     id: '',
     motivo: '',
     diagnostico: '',
     tratamiento: ''
   });
-  const { id } = useParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,17 +46,9 @@ const DetalleForm = props => {
   return (
     <div>
         <p>Ficha ID: {id}</p>
+        <p>Medico ID: {ficha.Medico.nombre} </p>
+        <p>Paciente ID: {ficha.Paciente.nombre}</p>
         <form onSubmit={handleSubmit}>
-        <div>
-            <label htmlFor="idField">ID:</label>
-            <input
-            type="text"
-            id="idField"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            />
-        </div>
         <div>
             <label htmlFor="motivoField">Motivo:</label>
             <textarea
@@ -64,7 +76,7 @@ const DetalleForm = props => {
             onChange={handleChange}
             />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Agregar</button>
         </form>
     </div>
   );
