@@ -7,7 +7,7 @@ import {
 import Home from './home';
 import Ficha from './ficha';
 import Crear from './crear';
-import Detalles from './detalles'
+import Detalle from './detalle'
 
 const Webpages = () => {
     return (
@@ -16,7 +16,7 @@ const Webpages = () => {
                 <Route path="/" element={<Home/>} />
                 <Route path="/ficha/:id" element={<Ficha/>} />
                 <Route path="/ficha/" element={<Crear/>} />
-                <Route path="/ficha-detalles/:id" component={Detalles} />
+                <Route path="/detalle/:id" component={Detalle} />
             </Routes>
         </BrowserRouter>
     );
