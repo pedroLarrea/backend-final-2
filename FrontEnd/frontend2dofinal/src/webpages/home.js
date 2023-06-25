@@ -53,6 +53,7 @@ function ListaConsultas() {
                             <div>
                                 <Link to={`ficha/${ficha.id}`}><button>Editar</button></Link>
                                 <Link to={`ficha/${ficha.id}`}><button>Ver</button></Link>
+                                <Link to={`detalle/${ficha.id}`}><button>Agregar Detalle</button></Link>
                                 <button onClick={ () => handleDelete(ficha.id) }>Eliminar</button>
                             </div>
                         </td>

@@ -57,10 +57,10 @@ const Form = () => {
         console.log(result);
         console.log(result.id);
         // Resetea campos del form
-        //setFecha('');
-        //setPacienteId('');
-        //setMedicoId('');
-        navigate(`/detalle/${result.id}`);
+        setFecha('');
+        setPacienteId('');
+        setMedicoId('');
+        //navigate(`/detalle/${result.id}`);
       })
       .catch((error) => {
         console.error('Error:', error);
