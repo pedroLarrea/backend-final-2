@@ -7,6 +7,14 @@ import { Link } from 'react-router-dom';
 function ListaConsultas() {
     const [fichas, setFichas] = useState([]);
     const [textoBuscar, setTextoBuscar] = useState('');
+    const [filters, setFilters] = useState({
+        fecha: '',
+        medicoEspecialidad: '',
+        medicoNombre: '',
+        medicoApellido: '',
+        pacienteNombre: '',
+        pacienteApellido: ''
+      });
 
     const handleDelete = (id) => {
         axios.delete(`http://localhost:9090/api/ficha/${id}`)
@@ -28,6 +36,31 @@ function ListaConsultas() {
                 console.error(error);
             });
     }
+
+    //Para el buscador
+
+    const filteredData = fichas.filter((item) => {
+        const { Fecha, Medico, Paciente } = item;
+        const { fecha, medicoEspecialidad, medicoNombre, medicoApellido, pacienteNombre, pacienteApellido } = filters;
+
+        const formattedFecha = Fecha ? Fecha.toString() : '';
+
+        return (
+          formattedFecha.includes(fecha) &&
+          Medico.especialidad.toLowerCase().includes(medicoEspecialidad.toLowerCase()) &&
+          Medico.nombre.toLowerCase().includes(medicoNombre.toLowerCase()) &&
+          Medico.apellido.toLowerCase().includes(medicoApellido.toLowerCase()) &&
+          Paciente.nombre.toLowerCase().includes(pacienteNombre.toLowerCase()) &&
+          Paciente.apellido.toLowerCase().includes(pacienteApellido.toLowerCase())
+        );
+      });
+
+    const handleFilterChange = (event) => {
+        const { name, value } = event.target;
+        setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
+      };
+
+    //Fin del buscador
 
     useEffect(() => {
         fetchRecords();
@@ -65,6 +98,14 @@ function ListaConsultas() {
             <div id="filtrarTabla">
                 <input type="search" placeholder="Buscar en todos los campos" value={textoBuscar} onChange={search} />
             </div>
+            <div>
+                <input type="text" name="fecha" value={filters.fecha} onChange={handleFilterChange} placeholder="Filtre por Fecha" />
+                <input type="text" name="medicoEspecialidad" value={filters.medicoEspecialidad} onChange={handleFilterChange} placeholder="Filtre por especialidad" />
+                <input type="text" name="medicoNombre" value={filters.medicoNombre} onChange={handleFilterChange} placeholder="Filtre por Medico Nombre" />
+                <input type="text" name="medicoApellido" value={filters.medicoApellido} onChange={handleFilterChange} placeholder="Filtre por Medico Apellido" />
+                <input type="text" name="pacienteNombre" value={filters.pacienteNombre} onChange={handleFilterChange} placeholder="Filtre por Paciente Nombre" />
+                <input type="text" name="pacienteApellido" value={filters.pacienteApellido} onChange={handleFilterChange} placeholder="Filtre por Paciente Apellido" />
+            </div>
             <table id="listaConsultasId">
                 <thead className="cabecaraGeneral">
                     <tr>
@@ -77,7 +118,7 @@ function ListaConsultas() {
                     </tr>
                 </thead>
                 <tbody className="listaDetalle">
-                    {fichas.map(ficha => (
+                    {filteredData.map(ficha => (
                         <tr key={ficha.id}>
                             <td>{ficha.id}</td>
                             <td>{ficha.fecha}</td>
