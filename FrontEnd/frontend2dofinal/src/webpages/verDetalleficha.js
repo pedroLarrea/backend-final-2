@@ -8,6 +8,32 @@ const DetalleList = props => {
     const [detalles, setDetalles] = useState([]);
     const [textoBuscar, setTextoBuscar] = useState('');
 
+    const [filters, setFilters] = useState({
+        motivo: '',
+        diagnostico: '',
+        tratamiento: ''
+    });
+
+    //Para el buscador
+
+    const filteredData = detalles.filter((item) => {
+        const { motivo, diagnostico, tratamiento } = item;
+        const { idDetalle, motivo: motivoFilter, diagnostico: diagnosticoFilter, tratamiento: tratamientoFilter } = filters;
+        return (
+            idDetalle ? item.id.toLowerCase().includes(idDetalle) : true  &&
+            motivo.toLowerCase().includes(motivoFilter.toLowerCase()) &&
+            diagnostico.toLowerCase().includes(diagnosticoFilter.toLowerCase()) &&
+            tratamiento.toLowerCase().includes(tratamientoFilter.toLowerCase())
+        );
+    });
+
+    const handleFilterChange = (event) => {
+        const { name, value } = event.target;
+        setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
+    };
+
+    //Fin del buscador
+
     const fetchRecords = () => {
         axios.get(`http://localhost:9090/api/ficha/completo/${id}`)
             .then(response => {
@@ -51,6 +77,21 @@ const DetalleList = props => {
             <div id="filtrarTabla">
                 <input type="search" placeholder="Buscar en todos los campos" value={textoBuscar} onChange={search} />
             </div>
+
+            
+            FILTRAR LISTA
+            <hr />
+            <div id="buscadorId">
+                <label>Id:</label>
+                <input type="text" name="idDetalle" value={filters.idDetalle} onChange={handleFilterChange} placeholder="Filtre por Id" />
+                <label>Motivo:</label>
+                <input type="text" name="motivo" value={filters.motivo} onChange={handleFilterChange} placeholder="Filtre por Paciente Motivo" />
+                <label>Diagnostico:</label>
+                <input type="text" name="diagnostico" value={filters.diagnostico} onChange={handleFilterChange} placeholder="Filtre por Diagnostico" />
+                <label>Tratamiento:</label>
+                <input type="text" name="tratamiento" value={filters.tratamiento} onChange={handleFilterChange} placeholder="Filtre por Tratamiento" />
+            </div>
+
             <table id="listaConsultasId">
                 <thead className="cabecaraVerDetalle">
                     <tr>
@@ -61,7 +102,7 @@ const DetalleList = props => {
                     </tr>
                 </thead>
                 <tbody className="listaDetalle">
-                    {detalles.map(detalle => (
+                    {filteredData.map(detalle => (
                         <tr key={detalle.id}>
                             <td>{detalle.id}</td>
                             <td>{detalle.motivo}</td>

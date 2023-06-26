@@ -17,6 +17,7 @@ function ListaConsultas() {
         pacienteApellido: ''
     });
 
+    //Busca en todos los campos
     const [query, setQuery] = useState();
 
     const search1 = () => {
