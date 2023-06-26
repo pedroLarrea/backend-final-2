@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
 
         fecha: {
 
-            type: Sequelize.DATE,
+            type: Sequelize.DATEONLY,
             
             allowNull: false
 
